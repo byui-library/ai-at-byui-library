@@ -172,6 +172,11 @@ ul.plain li::marker { color: var(--accent); }
 .principles ol { margin: 0; padding-left: 1.3rem; display: grid; gap: 14px; }
 .principles li::marker { font-family: var(--mono); color: var(--accent); font-weight: 500; }
 .principles li p { margin: 4px 0 0; }
+.principles .determ { margin: 10px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.principles .determ > div { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 10px 12px; min-width: 0; }
+.principles .determ-label { display: block; font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.principles .determ code { font-family: var(--mono); font-size: 0.875rem; line-height: 1.5; color: var(--ink); overflow-wrap: anywhere; }
+@media (max-width: 560px) { .principles .determ { grid-template-columns: minmax(0, 1fr); } }
 .principles .rounds { margin: 8px 0 0; padding-left: 1.1rem; display: grid; gap: 4px; font-size: 0.9375rem; }
 
 /* Assignment cards */
@@ -262,6 +267,17 @@ ul.plain li::marker { color: var(--accent); }
               <li>An open-ended prompt from the course topic, where answers spread out.</li>
               <li>"I, Nephi, said unto my father…" (1 Nephi 3:7). The class and the AI both complete it. When asked for the exact reference and the next verse, confidence drops, and the AI may produce a fluent, scriptural-sounding verse that isn't real.</li>
             </ul>
+            <p>I also show that an LLM is not a deterministic program. A simple math program gives the same result every time. An LLM given the same question gives similar answers, but never exactly the same answer twice.</p>
+            <div class="determ" role="group" aria-label="Deterministic program compared with an LLM">
+              <div>
+                <span class="determ-label">A program</span>
+                <code>A = 2, B = 3<br>C = A + B<br>→ C = 5, every run</code>
+              </div>
+              <div>
+                <span class="determ-label">An LLM</span>
+                <code>Same question, asked again<br>→ similar answer,<br>&nbsp;&nbsp;never the exact same one</code>
+              </div>
+            </div>
           </li>
           <li>
             <strong>A sliding scale of subjectivity.</strong>

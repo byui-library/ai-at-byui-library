@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="How BYU-Idaho Library is approaching AI: staff training, resources, AI-integrated assignments, and advice, prepared for the BYU Library AI Learning Task Force.">
+<title>How BYU-Idaho Library Approaches AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a single readable letter column, with a sticky "your questions" index beside it on wide screens and above it on phones. */
+:root {
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --ink: #1b2330;
+  --muted: #566173;
+  --rule: #d9dee6;
+  --accent: #1f4f82;
+  --accent-soft: #e6eef7;
+  --display: "Literata", Georgia, "Times New Roman", serif;
+  --body: "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.1875rem;
+  --step-2: 1.5rem;
+  --step-3: 2.125rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12161d;
+    --surface: #1a2029;
+    --ink: #e4e8ee;
+    --muted: #a0aabb;
+    --rule: #2e3643;
+    --accent: #8db8e6;
+    --accent-soft: #1d2a3a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12161d;
+  --surface: #1a2029;
+  --ink: #e4e8ee;
+  --muted: #a0aabb;
+  --rule: #2e3643;
+  --accent: #8db8e6;
+  --accent-soft: #1d2a3a;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: var(--step-0);
+  line-height: 1.65;
+  padding-inline: 16px;
+  padding-block: 40px 64px;
+}
+a { color: var(--accent); text-underline-offset: 2px; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+.wrap {
+  max-width: 1080px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+}
+@media (min-width: 960px) {
+  .wrap { grid-template-columns: 220px minmax(0, 1fr); gap: 56px; }
+  .toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); align-self: start; }
+  header.masthead { grid-column: 1 / -1; }
+}
+main { min-width: 0; max-width: 42rem; }
+
+/* Header */
+.masthead { max-width: 42rem; }
+@media (min-width: 960px) { .masthead { margin-left: calc(220px + 56px); } }
+.eyebrow {
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 12px;
+}
+h1 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: var(--step-3);
+  line-height: 1.15;
+  text-wrap: balance;
+  margin: 0 0 12px;
+}
+.byline { color: var(--muted); margin: 0 0 20px; }
+.byline .addr { user-select: all; }
+.intro p { margin: 0 0 12px; }
+
+/* Table of contents */
+.toc h2 {
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; border-left: 1px solid var(--rule); }
+.toc a {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr;
+  padding: 6px 0 6px 12px;
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+.toc a span { font-family: var(--mono); color: var(--accent); font-size: var(--step--1); padding-top: 2px; }
+.toc a:hover { color: var(--accent); }
+
+/* Sections */
+section { padding-block: 8px 24px; border-top: 1px solid var(--rule); margin-top: 24px; }
+section:first-of-type { border-top: 0; margin-top: 0; }
+h2.q {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: var(--step-2);
+  line-height: 1.25;
+  text-wrap: balance;
+  margin: 24px 0 8px;
+  scroll-margin-top: 24px;
+}
+h2.q .num { font-family: var(--mono); font-size: var(--step-0); color: var(--accent); margin-right: 10px; vertical-align: 3px; }
+.asked {
+  font-size: 0.9375rem;
+  color: var(--muted);
+  font-style: italic;
+  margin: 0 0 20px;
+}
+.asked b { font-style: normal; font-family: var(--mono); font-size: var(--step--1); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; margin-right: 6px; }
+h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: var(--step-1);
+  line-height: 1.3;
+  margin: 28px 0 8px;
+}
+p { margin: 0 0 14px; }
+ul.plain { margin: 0 0 14px; padding-left: 1.2rem; }
+ul.plain li { margin-bottom: 8px; }
+ul.plain li::marker { color: var(--accent); }
+
+.layers { list-style: none; padding: 0; margin: 0 0 20px; display: grid; gap: 14px; }
+.layers li { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 16px; }
+.layers .label { font-weight: 600; }
+@media (max-width: 560px) { .layers li { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+
+/* Principles callout */
+.principles {
+  background: var(--accent-soft);
+  border-radius: 6px;
+  padding: 20px 22px;
+  margin: 24px 0;
+}
+.principles h3 { margin-top: 0; }
+.principles ol { margin: 0; padding-left: 1.3rem; display: grid; gap: 14px; }
+.principles li::marker { font-family: var(--mono); color: var(--accent); font-weight: 500; }
+.principles li p { margin: 4px 0 0; }
+.principles .rounds { margin: 8px 0 0; padding-left: 1.1rem; display: grid; gap: 4px; font-size: 0.9375rem; }
+
+/* Assignment cards */
+.cards { display: grid; gap: 14px; margin: 16px 0 20px; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 18px 20px;
+  min-width: 0;
+}
+.card h4 { font-family: var(--display); font-size: 1.0625rem; font-weight: 600; margin: 0 0 4px; line-height: 1.35; }
+.meta { font-size: var(--step--1); color: var(--muted); margin: 0 0 10px; }
+.card p.desc { margin: 0 0 12px; font-size: 0.9375rem; }
+.downloads { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px 18px; }
+.downloads a { font-weight: 500; }
+.badge {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1px 5px;
+  margin-left: 6px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  vertical-align: 1px;
+}
+
+
+.sources { list-style: none; padding: 0; margin: 0 0 16px; display: grid; gap: 10px; }
+.sources li { padding-left: 14px; border-left: 2px solid var(--rule); }
+
+.advice { margin: 0 0 20px; padding-left: 1.3rem; display: grid; gap: 12px; }
+.advice li::marker { font-family: var(--mono); color: var(--accent); }
+.advice strong { display: block; }
+
+.closing { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--rule); }
+.closing .addr { user-select: all; font-weight: 500; }
+
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <p class="eyebrow">For the HBLL AI Learning Task Force</p>
+    <h1>How BYU-Idaho Library is approaching AI</h1>
+    <p class="byline">Mat Miles · BYU-Idaho Library · <a href="mailto:milesm@byui.edu" class="addr">milesm@byui.edu</a></p>
+    <div class="intro">
+      <p>Thank you for reaching out, and for the work your task force is taking on. I'm glad to share what we're doing at BYU-Idaho.</p>
+      <p>This page follows your four questions in order. The lesson plans, assignments, and reports linked below are yours to download and adapt however they help. They are PDFs here; if you would like the editable Word or PowerPoint versions, email me at <span class="addr">milesm@byui.edu</span> and I will send them.</p>
+    </div>
+  </header>
+
+  <nav class="toc" aria-labelledby="toc-heading">
+    <h2 id="toc-heading">Your questions</h2>
+    <ol>
+      <li><a href="#training"><span>1</span>Keeping staff trained</a></li>
+      <li><a href="#resources"><span>2</span>Resources we have</a></li>
+      <li><a href="#beyond"><span>3</span>Sources beyond the university</a></li>
+      <li><a href="#advice"><span>4</span>Advice for your task force</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <section aria-labelledby="training">
+      <h2 class="q" id="training"><span class="num">1</span>How we keep staff trained and capable</h2>
+      <p class="asked"><b>You asked</b>What is your staff doing currently to maintain training and capability in the use of AI?</p>
+
+      <p>We work at a few levels at once, from library-wide coordination down to one-on-one help.</p>
+      <ul class="layers">
+        <li><span class="label">Coordination</span><span>A library AI group coordinates our overall approach and keeps our efforts pointed in the same direction.</span></li>
+        <li><span class="label">Staff trainings</span><span>We hold regular trainings for library employees so everyone has a working familiarity with the tools and the issues.</span></li>
+        <li><span class="label">In the classroom</span><span>At a faculty member's request, librarians co-teach AI-integrated research sessions inside their courses. Each one pairs a library session with a student assignment. We take the professor's existing assignment, keep its requirements, and weave in critical use of generative AI.</span></li>
+        <li><span class="label">One-on-one</span><span>I work as a hands-on consultant and mentor for staff and faculty. Much of that is helping professors integrate AI into their curriculum and use AI to build curriculum.</span></li>
+      </ul>
+
+      <div class="principles">
+        <h3>Four principles I teach</h3>
+        <ol>
+          <li>
+            <strong>How generative AI works.</strong>
+            <p>Large language models are prediction engines: neural networks whose weighted connections are strengthened during training. I teach this with a three-round prediction game.</p>
+            <ul class="rounds">
+              <li>A nursery rhyme: "Twinkle, twinkle, little star, how I wonder…" Everyone finishes it instantly.</li>
+              <li>An open-ended prompt from the course topic, where answers spread out.</li>
+              <li>"I, Nephi, said unto my father…" (1 Nephi 3:7). The class and the AI both complete it. When asked for the exact reference and the next verse, confidence drops, and the AI may produce a fluent, scriptural-sounding verse that isn't real.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>A sliding scale of subjectivity.</strong>
+            <p>The more subjective the topic, the more critical you need to be. On objective topics like glycolysis or gravity, AI is usually on solid ground. On contested issues, its output is one viewpoint among many. Numbers and citations always need to be checked.</p>
+          </li>
+          <li>
+            <strong>Have AI verify itself.</strong>
+            <p>Ask it to check its own work. Then verify it yourself against the original source.</p>
+          </li>
+          <li>
+            <strong>Have AI interview you before it completes a task.</strong>
+            <p>Let it ask the questions it needs answered first. The result fits your situation much better.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section aria-labelledby="resources">
+      <h2 class="q" id="resources"><span class="num">2</span>What resources we have</h2>
+      <p class="asked"><b>You asked</b>What kinds of resources do you have available?</p>
+
+      <h3>On campus</h3>
+      <ul class="plain">
+        <li><a href="https://www.byui.edu/ai/">BYU-Idaho AI hub</a> is the place to start. It gathers the university's AI guidance, the tools available to campus, and faculty trainings from the Center for Learning and Teaching.</li>
+        <li>Our library guides: <a href="https://libguides.byui.edu/ai">Artificial Intelligence guide</a> and <a href="https://libguides.byui.edu/scholarly-research-ai">Scholarly research with AI</a>.</li>
+      </ul>
+
+      <h3>AI-integrated assignments</h3>
+      <p>These are real sessions we've taught. Each comes with an instructor session plan (timing table, talking points, demo prompts, checklist, rubric, and troubleshooting) and a student assignment.</p>
+      <div class="cards">
+        <article class="card">
+          <h4>County health data + AI</h4>
+          <p class="meta">Public health course · PolicyMap + Gemini · 90-minute session</p>
+          <p class="desc">Students evaluate a PolicyMap county health report with Gemini.</p>
+          <ul class="downloads">
+            <li><a href="https://byui-library.github.io/ai-at-byui-library/files/public-health-policymap-ai-assignment.pdf" target="_blank" rel="noopener" download>Student assignment</a><span class="badge">PDF · 273 KB</span></li>
+            <li><a href="https://byui-library.github.io/ai-at-byui-library/files/public-health-policymap-ai-session-plan.pdf" target="_blank" rel="noopener" download>Session plan</a><span class="badge">PDF · 270 KB</span></li>
+          </ul>
+        </article>
+        <article class="card">
+          <h4>Finding and assessing original research</h4>
+          <p class="meta">ESS 111 Introduction to Health Careers · NotebookLM + Gemini · 50 minutes</p>
+          <p class="desc">Students locate original research articles and use AI to help assess them.</p>
+          <ul class="downloads">
+            <li><a href="https://byui-library.github.io/ai-at-byui-library/files/ess111-research-articles-ai-assignment.pdf" target="_blank" rel="noopener" download>Student assignment</a><span class="badge">PDF · 298 KB</span></li>
+            <li><a href="https://byui-library.github.io/ai-at-byui-library/files/ess111-research-articles-ai-session-plan.pdf" target="_blank" rel="noopener" download>Session plan</a><span class="badge">PDF · 259 KB</span></li>
+          </ul>
+        </article>
+        <article class="card">
+          <h4>AI in research</h4>
+          <p class="meta">Political science course · NotebookLM, Gemini, EBSCO · 90-minute class session</p>
+          <p class="desc">A class session on using AI tools alongside library databases in the research process.</p>
+          <ul class="downloads">
+            <li><a href="https://byui-library.github.io/ai-at-byui-library/files/political-science-ai-in-research-lesson-plan.pdf" target="_blank" rel="noopener" download>Lesson plan</a><span class="badge">PDF · 289 KB</span></li>
+            <li><a href="https://byui-library.github.io/ai-at-byui-library/files/political-science-ai-in-research-slides.pdf" target="_blank" rel="noopener" download>Slides</a><span class="badge">PDF · 279 KB</span></li>
+          </ul>
+        </article>
+      </div>
+
+      <h3>Faculty consulting</h3>
+      <p>A few examples of the AI work I've done with faculty:</p>
+      <div class="cards">
+        <article class="card">
+          <h4>Measuring Student Learning in the Age of AI</h4>
+          <p class="meta">Research report · prepared for the BYU Provo Library Committee</p>
+          <ul class="downloads">
+            <li><a href="https://byui-library.github.io/ai-at-byui-library/files/measuring-student-learning-in-the-age-of-ai.pdf" target="_blank" rel="noopener" download>Full report</a><span class="badge">PDF · 322 KB</span></li>
+            <li><a href="https://byui-library.github.io/ai-at-byui-library/files/measuring-student-learning-executive-summary.pdf" target="_blank" rel="noopener" download>Executive summary</a><span class="badge">PDF · 172 KB</span></li>
+          </ul>
+        </article>
+      </div>
+      <ul class="plain">
+        <li>AI-assisted systematic review screening for a sports science research manuscript, with a documented AI audit trail and an AI-use disclosure.</li>
+        <li>AI-supported Canvas course redesigns.</li>
+        <li>AI-assisted drafting of an open textbook chapter with a faculty author.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="beyond">
+      <h2 class="q" id="beyond"><span class="num">3</span>Where I look beyond the university</h2>
+      <p class="asked"><b>You asked</b>Are your resources mainly based at BYU-Idaho, or do you also include trainings from other organizations (Meta, Google, ALA, SAA, etc.)?</p>
+
+      <p>My answer here is personal. I don't rely on formal vendor or association courses. What actually keeps me current is this:</p>
+      <ul class="sources">
+        <li><strong>YouTube.</strong> This is where I learn the most, especially for seeing new tools and techniques in action.</li>
+        <li><strong>Ethan Mollick's <a href="https://www.oneusefulthing.org/">One Useful Thing</a>.</strong> Consistently practical thinking about how to use AI well.</li>
+        <li><strong>Current reporting.</strong> I follow AI coverage in the Wall Street Journal, The Atlantic, and the New York Times.</li>
+      </ul>
+      <p>I read about AI trends in general, not only in education. The most useful ideas for libraries often come from seeing how AI is changing work everywhere else.</p>
+    </section>
+
+    <section aria-labelledby="advice">
+      <h2 class="q" id="advice"><span class="num">4</span>My advice for your task force</h2>
+      <p class="asked"><b>You asked</b>Any advice about where we could look for further training focused on library staff and faculty beyond university-provided training?</p>
+
+      <ol class="advice">
+        <li><strong>Learn by doing real work.</strong> Pick a task you actually have this week and use AI on it. That teaches more than any overview course.</li>
+        <li><strong>Tie training to real assignments and workflows.</strong> Staff learn fastest when the training is built around something they already do, rather than a generic course.</li>
+        <li><strong>Follow a few good thinkers and the news.</strong> Look beyond education sources. How AI is changing other fields will tell you a lot about where libraries are headed.</li>
+        <li><strong>Give people someone to go to, and teach verification alongside tools.</strong> A hands-on person or a small community of practice keeps momentum going. Pair every tool with habits like the four principles above, so people learn to question the output as well as produce it.</li>
+      </ol>
+
+      <p class="closing">I'm happy to talk through any of this or share more. You can reach me at <span class="addr">milesm@byui.edu</span>.</p>
+    </section>
+  </main>
+</div>
+</body>
+</html>
